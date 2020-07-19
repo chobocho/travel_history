@@ -1,0 +1,6 @@
+/.idea
+/src/__pycache__
+/src/buildinfo/__pycache__
+/src/buildinfo/version.json.bak
+__pycache__
+/src/20201105.cfm.db
