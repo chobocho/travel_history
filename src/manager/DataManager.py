@@ -63,7 +63,7 @@ class DataManager:
             return emptyMemo
         memo = self.memoList[memoIdx].copy()
         keywordList = searchKeyword.lower().split('|')
-        highLightPosition = textutil.searchKeyword(memo['memo']['memo'].lower(), keywordList)
+        highLightPosition = textutil.searchKeyword(self.__memoToString(memo['memo']).lower(), keywordList)
         memo['highlight'] = highLightPosition[:]
         return memo
 
@@ -77,8 +77,15 @@ class DataManager:
         for key in self.memoListOrigin.keys():
             if filter in self.memoListOrigin[key]['id'].lower():
                 self.memoList[key] = self.memoListOrigin[key]
-            elif filter in self.memoListOrigin[key]['memo'].lower():
+            elif filter in self.__memoToString(self.memoListOrigin[key]['memo']).lower():
                 self.memoList[key] = self.memoListOrigin[key]
+
+    def __memoToString(self, memo):
+        result = []
+        for k, v in memo.items():
+            result.append(k + ':' + v)
+        return ('\n').join(result)
+
 
 def test():
     '''Test code for TDD'''
